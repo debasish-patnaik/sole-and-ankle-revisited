@@ -7,6 +7,7 @@ import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
 	const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -35,12 +36,15 @@ const Header = () => {
 					<MobileHeaderWrapper>
 						<UnstyledButton>
 							<Icon id="shopping-bag" strokeWidth={2} />
+							<VisuallyHidden>Open Cart</VisuallyHidden>
 						</UnstyledButton>
 						<UnstyledButton>
 							<Icon id="search" strokeWidth={2} />
+							<VisuallyHidden>Search</VisuallyHidden>
 						</UnstyledButton>
 						<UnstyledButton onClick={() => setShowMobileMenu(true)}>
 							<Icon id="menu" strokeWidth={2} />
+							<VisuallyHidden>Open Menu</VisuallyHidden>
 						</UnstyledButton>
 					</MobileHeaderWrapper>
 				</Side>
@@ -62,14 +66,19 @@ const MainHeader = styled.div`
 	border-bottom: 1px solid ${COLORS.gray[300]};
 
 	@media ${QUERIES.tabletAndDown} {
-		padding: 18px 16px;
 		justify-content: space-between;
+		align-items: center;
+		border-block-start: 4px solid ${COLORS.gray[900]};
+	}
+
+	@media ${QUERIES.phoneAndDown} {
+		padding: 18px 16px;
 	}
 `;
 
 const Nav = styled.nav`
 	display: flex;
-	gap: 48px;
+	gap: clamp(1rem, 8.8vw - 4.25rem, 3rem);
 	margin: 0px 48px;
 
 	@media ${QUERIES.tabletAndDown} {
@@ -90,7 +99,10 @@ const MobileHeaderWrapper = styled.div`
 
 	@media ${QUERIES.tabletAndDown} {
 		display: flex;
-		margin-left: auto;
+		gap: 32px;
+	}
+
+	@media ${QUERIES.phoneAndDown} {
 		gap: 16px;
 	}
 `;
