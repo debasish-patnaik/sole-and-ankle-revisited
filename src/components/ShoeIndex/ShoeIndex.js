@@ -9,39 +9,46 @@ import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
 
+const ShoeBreadcrumbs = () => {
+	return (
+		<Breadcrumbs>
+			<Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+			<Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+			<Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+		</Breadcrumbs>
+	);
+};
+
 const ShoeIndex = ({ sortId, setSortId }) => {
 	return (
 		<Wrapper>
 			<MainColumn>
 				<Header>
-					<Title>Running</Title>
-					<Select
-						label="Sort"
-						value={sortId}
-						onChange={(ev) => setSortId(ev.target.value)}
-					>
-						<option value="newest">Newest Releases</option>
-						<option value="price">Price</option>
-					</Select>
+					<div>
+						<MobileBreadcrumbs>
+							<ShoeBreadcrumbs />
+						</MobileBreadcrumbs>
+						<Title>Running</Title>
+					</div>
+					<SortFilterWrapper>
+						<Select
+							label="Sort"
+							value={sortId}
+							onChange={(ev) => setSortId(ev.target.value)}
+						>
+							<option value="newest">Newest Releases</option>
+							<option value="price">Price</option>
+						</Select>
+					</SortFilterWrapper>
 				</Header>
-				<MobileHeader>
-					<Breadcrumbs>
-						<Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-						<Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-						<Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
-					</Breadcrumbs>
-					<Title>Running</Title>
-				</MobileHeader>
 
 				<Spacer size={32} />
 				<ShoeGrid />
 			</MainColumn>
 			<LeftColumn>
-				<Breadcrumbs>
-					<Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-					<Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-					<Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
-				</Breadcrumbs>
+				<DesktopBreadcrumbs>
+					<ShoeBreadcrumbs />
+				</DesktopBreadcrumbs>
 				<Spacer size={42} />
 				<ShoeSidebar />
 			</LeftColumn>
@@ -74,22 +81,32 @@ const Header = styled.header`
 	align-items: baseline;
 
 	@media ${QUERIES.tabletAndDown} {
-		display: none;
-	}
-`;
-
-const MobileHeader = styled.header`
-	display: none;
-
-	@media ${QUERIES.tabletAndDown} {
-		display: flex;
-		flex-direction: column;
+		align-items: flex-end;
 	}
 `;
 
 const Title = styled.h2`
 	font-size: 1.5rem;
 	font-weight: ${WEIGHTS.medium};
+`;
+
+const DesktopBreadcrumbs = styled.div`
+	@media ${QUERIES.tabletAndDown} {
+		display: none;
+	}
+`;
+
+const MobileBreadcrumbs = styled.div`
+	display: none;
+	@media ${QUERIES.tabletAndDown} {
+		display: revert;
+	}
+`;
+
+const SortFilterWrapper = styled.div`
+	@media ${QUERIES.phoneAndDown} {
+		display: none;
+	}
 `;
 
 export default ShoeIndex;
