@@ -9,10 +9,6 @@ import VisuallyHidden from '../VisuallyHidden';
 import { COLORS, WEIGHTS } from '../../constants';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
-	if (!isOpen) {
-		return null;
-	}
-
 	return (
 		<Overlay isOpen={isOpen} onDismiss={onDismiss}>
 			<Content aria-label="Menu">
@@ -51,15 +47,16 @@ const Overlay = styled(DialogOverlay)`
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: hsl(0deg 0% 0% / 0.5);
+	background: hsl(220deg 5% 40% / 0.8);
+	display: flex;
+	justify-content: flex-end;
 `;
 
 const Content = styled(DialogContent)`
 	position: relative;
 	background: hsl(0deg 0% 100%);
 	height: 100%;
-	width: 75%;
-	left: 25vw;
+	width: 300px;
 	padding: 32px;
 	display: flex;
 	flex-direction: column;
@@ -67,14 +64,15 @@ const Content = styled(DialogContent)`
 
 const CloseButton = styled(UnstyledButton)`
 	position: absolute;
-	top: 26px;
-	right: 16px;
+	top: 10px;
+	right: 0px;
+	padding: 16px;
 `;
 
 const Nav = styled.nav`
 	display: flex;
 	flex-direction: column;
-	gap: 22px;
+	gap: 16px;
 	flex: 3;
 	justify-content: center;
 `;
